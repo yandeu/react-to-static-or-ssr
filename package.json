@@ -1,0 +1,83 @@
+{
+  "name": "react-to-static-or-ssr",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "npm-run-all dev:*",
+    "dev:client": "webpack-dev-server --config webpack/webpack.dev.js --watch",
+    "dev:server": "npm run watch:server",
+    "build:client": "webpack --env.production --progress --config webpack/webpack.prod.js",
+    "watch:client": "webpack --config webpack/webpack.dev.js --watch",
+    "watch:server": "webpack --config webpack/webpack.server.js --watch",
+    "spa:dev": "npm-run-all --parallel watch:client spa:dev:*",
+    "spa:dev:nodemon": "nodemon --delay 250ms server/dist/spa.js",
+    "ssr:dev": "npm-run-all --parallel watch:* ssr:dev:*",
+    "ssr:dev:nodemon": "nodemon --delay 250ms server/dist/ssr.js",
+    "static:dev": "npm-run-all --parallel watch:* static:dev:*",
+    "static:dev:nodemon": "nodemon --delay 250ms server/dist/static.js",
+    "serve:spa": "npm run build:client && node server/dist/spa.js",
+    "serve:ssr": "npm run build:client && node server/dist/ssr.js",
+    "serve:static": "npm run build:client && node server/dist/static.js"
+  },
+  "reactSnap": {
+    "source": "dist"
+  },
+  "keywords": [
+    "react",
+    "static",
+    "ssr",
+    "typescript",
+    "webpack"
+  ],
+  "author": "Yannick Deubel",
+  "license": "MIT",
+  "description": "A react starter template for creating single page applications, static html or server side rendering.",
+  "homepage": "https://github.com/yandeu/react-to-static-or-ssr#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yandeu/react-to-static-or-ssr.git"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-helmet": "^5.2.1",
+    "react-jss": "^10.0.0",
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^5.1.2",
+    "serialize-javascript": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/compression": "^1.0.1",
+    "@types/express": "^4.17.1",
+    "@types/node": "^12.7.12",
+    "@types/react-dom": "^16.9.1",
+    "@types/react-helmet": "^5.0.11",
+    "@types/react-router-config": "^5.0.1",
+    "@types/react-router-dom": "^5.1.0",
+    "autoprefixer": "^9.6.5",
+    "css-loader": "^3.2.0",
+    "html-webpack-plugin": "^4.0.0-beta.8",
+    "isomorphic-style-loader": "^5.1.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "nodemon": "^1.19.3",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^7.0.18",
+    "postcss-loader": "^3.0.0",
+    "postcss-modules-values": "^3.0.0",
+    "prettier": "^1.18.2",
+    "style-loader": "^1.0.0",
+    "ts-loader": "^6.2.0",
+    "typescript": "^3.7.0-dev.20191017",
+    "webpack": "^4.41.1",
+    "webpack-assets-manifest": "^3.1.1",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2",
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

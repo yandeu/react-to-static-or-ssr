@@ -1,0 +1,43 @@
+.root div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.burger {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 769px) {
+  .burger {
+    display: none !important;
+  }
+  .navbar a {
+    list-style: none;
+    display: inline-block;
+    text-decoration: none;
+    margin-left: 16px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    margin-top: 16px;
+  }
+  .navbar ul {
+    list-style: none;
+    width: 100%;
+  }
+  .navbar ul a {
+    text-decoration: none;
+  }
+  .navbar ul a li {
+    padding: 8px;
+    background: yellow;
+  }
+  .navbar ul a li:hover {
+    background: red;
+  }
+}

@@ -1,0 +1,6 @@
+@value light from "../../css/colors.css";
+
+.root {
+  background: light;
+  text-align: center;
+}
