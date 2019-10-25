@@ -63,9 +63,13 @@ const generateStaticHtml = async () => {
     const sheets = new SheetsRegistry()
 
     // load async data
-    const promises = matchRoutes(routes, url).map(({ route }) => {
-      return route.loadData ? route.loadData() : null
+    let promises: any[] = []
+    matchRoutes(routes, url).forEach(({ route }) => {
+      if (route.loadData) promises.push(route.loadData())
     })
+
+    // flatten array of promises
+    promises = promises.reduce((acc, val) => acc.concat(val), [])
 
     // wait for all promises to load
     // and get all states from the async fetch requests
@@ -73,13 +77,7 @@ const generateStaticHtml = async () => {
     await Promise.all(promises)
       .then(results => {
         results.forEach(state => {
-          if (state !== null) {
-            if (Array.isArray(state)) {
-              state.forEach(s => {
-                initialState = { ...initialState, ...s }
-              })
-            } else initialState = { ...initialState, ...state }
-          }
+          initialState = { ...initialState, ...state }
         })
       })
       .catch(error => console.error('ERROR: Promise.all(): ' + error.message))

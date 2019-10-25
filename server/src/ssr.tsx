@@ -31,9 +31,13 @@ app.get('*', async (req, res) => {
   const sheets = new SheetsRegistry()
 
   // load async data
-  const promises = matchRoutes(routes, req.url).map(({ route }) => {
-    return route.loadData ? route.loadData() : null
+  let promises: any[] = []
+  matchRoutes(routes, req.url).forEach(({ route }) => {
+    if (route.loadData) promises.push(route.loadData())
   })
+
+  // flatten array of promises
+  promises = promises.reduce((acc, val) => acc.concat(val), [])
 
   // wait for all promises to load
   // and get all states from the async fetch requests
@@ -41,13 +45,7 @@ app.get('*', async (req, res) => {
   await Promise.all(promises)
     .then(results => {
       results.forEach(state => {
-        if (state !== null) {
-          if (Array.isArray(state)) {
-            state.forEach(s => {
-              initialState = { ...initialState, ...s }
-            })
-          } else initialState = { ...initialState, ...state }
-        }
+        initialState = { ...initialState, ...state }
       })
     })
     .catch(error => console.error('ERROR: Promise.all(): ' + error.message))

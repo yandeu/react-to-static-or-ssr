@@ -7,8 +7,8 @@ import { fetchName, fetchEmailAddresses } from '../store/actions'
 const loadData = () => {
   // if you fetch only one resource you can simply use ↵
   // return serverStore.dispatch(fetchName())
-  // but if you fetch multiple resources use ↵
-  return Promise.all([serverStore.dispatch(fetchName()), serverStore.dispatch(fetchEmailAddresses())])
+  // but if you fetch multiple resources use an array ↵
+  return [serverStore.dispatch(fetchName()), serverStore.dispatch(fetchEmailAddresses())]
 }
 
 const Home = () => {
