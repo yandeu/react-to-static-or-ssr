@@ -26,6 +26,8 @@ A react starter template for creating single page applications, static html file
 - SEO features with react-helmet (incl. SSR)
 - Async data fetching and rendering using only the react context api (no redux)
 - Hydrates the react app after page load
+- Uses react-router-config instead of react-router-dom for rendering the matching route
+- LazyLoading will be implemented as soon as react.lazy() is available on the server side. (_You can implement @loadable/component for now, if you want_)
 - css
   - Normal css (import ./some.css)
   - css modules (import styles from './some.module.css')
