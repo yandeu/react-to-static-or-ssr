@@ -25,10 +25,50 @@ A react starter template for creating single page applications, static html file
 - Using TypeScript
 - SEO features with react-helmet (incl. SSR)
 - Async data fetching and rendering using only the react context api (no redux)
+- Hydrates the react app after page load
 - css
   - Normal css (import ./some.css)
   - css modules (import styles from './some.module.css')
   - JSS (with SSR) _this is what I personally recommend, since it is directly rendered into the html file_
+
+## Prefetching
+
+Prefetching date is easy. See example below.
+
+```tsx
+// DisplayName.tsx
+import React, { useEffect } from 'react'
+
+import { clientStore, serverStore, withStore } from '../store/store'
+import { fetchName } from '../store/actions'
+
+const loadData = () => {
+  return serverStore.dispatch(fetchName())
+}
+
+const DisplayName = () => {
+  const store = clientStore()
+
+  useEffect(() => {
+    store.dispatch(fetchName())
+  }, [])
+
+  return (
+    <div>
+      <section className="section">
+        <div className="container">
+          <h1>Prefetch Name</h1>
+          <p>
+            The prefetched name: <b>{store.state.name}</b>
+          </p>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+export default withStore(DisplayName, { loadData })
+```
 
 ## Scripts
 

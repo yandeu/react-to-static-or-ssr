@@ -4,7 +4,8 @@ import { routeStore } from './store/store'
 import App from './App'
 import Home from './Pages/Home'
 import About from './Pages/About'
-import SimplePage from './Pages/SomePage'
+import SomePage from './Pages/SomePage'
+import DisplayName from './Pages/DisplayName'
 
 const routes: RouteConfig[] = [
   {
@@ -21,9 +22,14 @@ const routes: RouteConfig[] = [
         ...routeStore(About)
       },
       {
+        path: '/name',
+        exact: true,
+        ...routeStore(DisplayName)
+      },
+      {
         path: '/simple',
         exact: true,
-        component: SimplePage
+        component: SomePage
       }
     ]
   }

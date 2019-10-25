@@ -1,7 +1,7 @@
 import React from 'react'
 import Hero from '../Components/Hero/Hero'
 
-const SimplePage = () => {
+const SomePage = () => {
   return (
     <div>
       <Hero title="A very simple page" subtitle="without data fetching" />
@@ -15,4 +15,4 @@ const SimplePage = () => {
   )
 }
 
-export default SimplePage
+export default SomePage
