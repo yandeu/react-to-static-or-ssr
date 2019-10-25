@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Hero from '../Components/Hero/Hero'
 
-import { clientStore, serverStore } from '../store/store'
+import { clientStore, serverStore, withStore } from '../store/store'
 import { fetchName, fetchEmailAddresses } from '../store/actions'
 
 const loadData = () => {
@@ -44,4 +44,4 @@ const Home = () => {
   )
 }
 
-export default { component: Home, loadData: loadData }
+export default withStore(Home, { loadData })

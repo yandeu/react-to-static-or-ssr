@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Hero from '../Components/Hero/Hero'
 
-import { clientStore, serverStore } from '../store/store'
+import { clientStore, serverStore, withStore } from '../store/store'
 import { fetchUserNameAndId } from '../store/actions'
 // @ts-ignore
 import { createUseStyles } from 'react-jss'
@@ -49,4 +49,4 @@ const About = () => {
   )
 }
 
-export default { component: About, loadData: loadData }
+export default withStore(About, {loadData})

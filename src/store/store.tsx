@@ -15,7 +15,12 @@ interface ServerStore {
   dispatch: Function
 }
 
-// the initial state
+interface WithStore {
+  loadData?: Function
+  component: () => JSX.Element
+}
+
+// some initial state for testing
 const INITIAL_STATE = {
   name: 'NAME PLACEHOLDER',
   test: 123,
@@ -46,3 +51,16 @@ export const serverStore: ServerStore = {
 }
 
 export const clientStore = (): ClientStore => useContext(Store)
+
+// structures an component to be used with react-router-config
+export const withStore = (component: () => JSX.Element, params?: { loadData: Function }): WithStore => {
+  return { component, ...params }
+}
+
+// does just destructure a component wrapped with withStore()
+export const routeStore = (componentWithStore: WithStore) => {
+  return {
+    component: componentWithStore.component,
+    loadData: componentWithStore.loadData
+  }
+}
