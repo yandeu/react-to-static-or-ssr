@@ -25,6 +25,7 @@ const Home = () => {
       <section className="section">
         <div className="container">
           <h2>Address: {store.state.address}</h2>
+          <img style={{maxWidth: 200}} src="/img/react-logo.svg" />
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
             has been the industry's standard dummy text ever since the 1500s, when an unknown

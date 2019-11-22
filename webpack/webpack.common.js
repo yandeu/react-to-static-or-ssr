@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = env => {
   const devMode = env && env.production ? false : true
@@ -44,18 +45,19 @@ module.exports = env => {
       extensions: ['.tsx', '.ts', '.js', '.css']
     },
     output: {
-      filename: devMode ? 'static/bundle.js' : 'static/bundle.[contenthash].js',
+      filename: devMode ? 'js/bundle.js' : 'js/bundle.[contenthash].js',
       path: path.resolve(__dirname, '../dist'),
       publicPath: '/'
     },
     plugins: [
+      new CopyPlugin([{ from: 'public', to: '' }]),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),
         filename: 'index.html'
       }),
       new MiniCssExtractPlugin({
-        filename: devMode ? 'static/styles.css' : 'static/styles.[contenthash].css',
-        chunkFilename: devMode ? 'static/[id].css' : 'static/[id].[contenthash].css',
+        filename: devMode ? 'css/styles.css' : 'css/styles.[contenthash].css',
+        chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[contenthash].css',
         ignoreOrder: false
       }),
       new WebpackAssetsManifest({
