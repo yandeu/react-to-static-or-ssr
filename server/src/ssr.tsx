@@ -23,7 +23,7 @@ const app = express()
 
 app.use(compression())
 
-app.use('/static', express.static(path.resolve(__dirname, '../../dist/static')))
+app.use('/', express.static(path.resolve(__dirname, '../../dist')))
 
 app.get('*', async (req, res) => {
   const context: { url?: string } = {}
