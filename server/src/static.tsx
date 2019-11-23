@@ -23,7 +23,7 @@ const app = express()
 
 app.use(compression())
 
-app.use('/', express.static(path.resolve(__dirname, '../../dist')))
+app.use('/', express.static(path.resolve(__dirname, '../../dist'), { extensions: [''] }))
 
 app.get('*', (req, res) => {
   // remove trailing slash
@@ -35,7 +35,20 @@ app.get('*', (req, res) => {
   // serve the html without .html extenstion
   let url = req.path === '/' ? 'index' : req.path
   fs.readFile(path.resolve(__dirname, `../../dist/${url}.html`), 'utf8', (err, data) => {
-    if (err) res.status(404).send('404_PAGE')
+    if (err)
+      res.status(404).send(`
+    <!DOCTYPE html>
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #4a4a4a;
+    }
+    </style>
+    <body style="text-align: center; margin-top: 48px;">
+      <h1>404_PAGE</h1><h3>sorry :/</h3>
+    </body>`)
     return res.send(data)
   })
 })

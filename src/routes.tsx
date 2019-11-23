@@ -6,6 +6,7 @@ import Home from './Pages/Home'
 import About from './Pages/About'
 import SomePage from './Pages/SomePage'
 import DisplayName from './Pages/DisplayName'
+import NotFoundPage from './Pages/404'
 
 const routes: RouteConfig[] = [
   {
@@ -30,6 +31,10 @@ const routes: RouteConfig[] = [
         path: '/simple',
         exact: true,
         component: SomePage
+      },
+      {
+        path: '*',
+        component: NotFoundPage
       }
     ]
   }

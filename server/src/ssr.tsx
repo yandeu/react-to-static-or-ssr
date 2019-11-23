@@ -23,10 +23,10 @@ const app = express()
 
 app.use(compression())
 
-app.use('/', express.static(path.resolve(__dirname, '../../dist')))
+app.use('/', express.static(path.resolve(__dirname, '../../dist'), { index: false }))
 
 app.get('*', async (req, res) => {
-  const context: { url?: string } = {}
+  const context: { url?: string; status?: number } = {}
 
   const sheets = new SheetsRegistry()
 
@@ -61,6 +61,8 @@ app.get('*', async (req, res) => {
   )
 
   const helmet = Helmet.renderStatic()
+
+  if (context.status) res.status(context.status)
 
   if (context.url) {
     res.writeHead(302, {
