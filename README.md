@@ -74,10 +74,22 @@ export default withStore(DisplayName, { loadData })
 
 ## Scripts
 
-- `npm start` or `npm run dev` to run webpack-dev-server with normal react
-- `npm spa:dev` to debug the spa server
-- `npm ssr:dev` to develop the ssr react app
-- `npm static:dev` to develop the static react app
+### Development
+
+- `npm start` or `npm run dev` to run the webpack dev server
+- `npm spa` start app with SPA server
+- `npm ssr` start app with SSR server
+- `npm static` start app with STATIC server
+
+### Build
+
+run `npm spa:build` or `npm ssr:build` or `npm static:build`
+
+### Serve
+
+Serve the app after you have build the production ready code.
+
+run `npm spa:serve` or `npm ssr:serve` or `npm static:serve`
 
 ## Ports
 
