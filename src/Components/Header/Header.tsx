@@ -36,7 +36,9 @@ const Header = () => {
   return (
     <header className={styles.root}>
       <div className="container">
-        <div className={styles.logo}>LOGO</div>
+        <div className={styles.logo}>
+          <Link to="/">LOGO</Link>
+        </div>
         <nav onClick={toggleNav} className={styles.nav}>
           <span className={styles.burger}>navbar</span>
           {navBar()}
