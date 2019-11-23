@@ -1,19 +1,17 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import styles from './Header.module.css'
 import { Link } from 'react-router-dom'
 
-class Header extends Component {
-  state = {
-    open: false
+const Header = () => {
+  const [open, setOpen] = useState(false)
+
+  const toggleNav = () => {
+    setOpen(!open)
   }
 
-  toggleNav = () => {
-    this.setState({ open: !this.state.open })
-  }
-
-  navBar = () => {
+  const navBar = () => {
     let classes = [styles.navbar]
-    if (!this.state.open) classes.push('is-hidden-mobile')
+    if (!open) classes.push('is-hidden-mobile')
 
     return (
       <div className={classes.join(' ')}>
@@ -35,19 +33,17 @@ class Header extends Component {
     )
   }
 
-  render() {
-    return (
-      <header className={styles.root}>
-        <div className="container">
-          <div className={styles.logo}>LOGO</div>
-          <nav onClick={this.toggleNav} className={styles.nav}>
-            <span className={styles.burger}>navbar</span>
-            {this.navBar()}
-          </nav>
-        </div>
-      </header>
-    )
-  }
+  return (
+    <header className={styles.root}>
+      <div className="container">
+        <div className={styles.logo}>LOGO</div>
+        <nav onClick={toggleNav} className={styles.nav}>
+          <span className={styles.burger}>navbar</span>
+          {navBar()}
+        </nav>
+      </div>
+    </header>
+  )
 }
 
 export default Header
