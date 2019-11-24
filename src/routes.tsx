@@ -1,5 +1,4 @@
 import { RouteConfig } from 'react-router-config'
-import { routeStore } from './store/store'
 
 import App from './App'
 import Home from './Pages/Home'
@@ -17,17 +16,17 @@ const routes: RouteConfig[] = [
       {
         path: '/',
         exact: true,
-        ...routeStore(Home)
+        component: Home
       },
       {
         path: '/about',
         exact: true,
-        ...routeStore(About)
+        component: About
       },
       {
         path: '/name',
         exact: true,
-        ...routeStore(DisplayName)
+        component: DisplayName
       },
       {
         path: '/simple',
@@ -37,12 +36,12 @@ const routes: RouteConfig[] = [
       {
         path: '/tutorials',
         exact: true,
-        ...routeStore(Tutorials)
+        component: Tutorials
       },
       {
         path: '/tutorials/:id',
         exact: true,
-        ...routeStore(Tutorial)
+        component: Tutorial
       },
       {
         path: '*',

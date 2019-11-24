@@ -33,7 +33,8 @@ app.get('*', async (req, res) => {
   // load async data
   let promises: any[] = []
   matchRoutes(routes, req.url).forEach(({ route }) => {
-    if (route.loadData) promises.push(route.loadData({ url: req.url, origin }))
+    // @ts-ignore
+    if (route.component?.prefetchData) promises.push(route.component.prefetchData({ url: req.url, origin }))
   })
 
   // flatten array of promises

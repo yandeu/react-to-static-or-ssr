@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Hero from '../Components/Hero/Hero'
 
-import { clientStore, serverStore, withStore } from '../store/store'
+import { clientStore, serverStore } from '../store/store'
 import { fetchUserNameAndId } from '../store/actions'
 // @ts-ignore
 import { createUseStyles } from 'react-jss'
@@ -16,10 +16,6 @@ const useStyles = createUseStyles({
     }
   }
 })
-
-const loadData = () => {
-  return serverStore.dispatch(fetchUserNameAndId())
-}
 
 const About = () => {
   const classes = useStyles()
@@ -38,10 +34,15 @@ const About = () => {
           <p>Bli bla blu.</p>
           <br />
           <ul>
-            {store.state.userData? 
-              store.state.userData?.map(({id,name},i)=>(<li key={i} ><b>{id}</b>: {name}</li> )) 
-              : <div>...loading</div>
-            }
+            {store.state.userData ? (
+              store.state.userData?.map(({ id, name }, i) => (
+                <li key={i}>
+                  <b>{id}</b>: {name}
+                </li>
+              ))
+            ) : (
+              <div>...loading</div>
+            )}
           </ul>
         </div>
       </section>
@@ -49,4 +50,8 @@ const About = () => {
   )
 }
 
-export default withStore(About, {loadData})
+About.prefetchData = () => {
+  return serverStore.dispatch(fetchUserNameAndId())
+}
+
+export default About

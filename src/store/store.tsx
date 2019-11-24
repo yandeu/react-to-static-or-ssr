@@ -51,16 +51,3 @@ export const serverStore: ServerStore = {
 }
 
 export const clientStore = (): ClientStore => useContext(Store)
-
-// structures an component to be used with react-router-config
-export const withStore = (component: (args?: any) => JSX.Element, params?: { loadData: Function }): WithStore => {
-  return { component, ...params }
-}
-
-// does just destructure a component wrapped with withStore()
-export const routeStore = (componentWithStore: WithStore) => {
-  return {
-    component: componentWithStore.component,
-    loadData: componentWithStore.loadData
-  }
-}

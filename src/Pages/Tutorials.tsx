@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react'
-import { clientStore, serverStore, withStore } from '../store/store'
+import { clientStore, serverStore } from '../store/store'
 import { fetchPages } from '../store/actions'
 import Hero from '../Components/Hero/Hero'
 import { Link } from 'react-router-dom'
-
-const loadData = () => {
-  return serverStore.dispatch(fetchPages('tutorials'))
-}
 
 const Tutorials = () => {
   const store = clientStore()
@@ -31,4 +27,8 @@ const Tutorials = () => {
   )
 }
 
-export default withStore(Tutorials, { loadData })
+Tutorials.prefetchData = () => {
+  return serverStore.dispatch(fetchPages('tutorials'))
+}
+
+export default Tutorials

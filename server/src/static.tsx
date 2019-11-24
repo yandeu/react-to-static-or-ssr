@@ -82,7 +82,8 @@ const generateStaticHtml = async () => {
     // load async data
     let promises: any[] = []
     matchRoutes(routes, url).forEach(({ route }) => {
-      if (route.loadData) promises.push(route.loadData({ url, origin }))
+      // @ts-ignore
+      if (route.component?.prefetchData) promises.push(route.component.prefetchData({ url, origin }))
     })
 
     // flatten array of promises

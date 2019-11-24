@@ -48,12 +48,8 @@ Prefetching date is easy. See example below.
 // DisplayName.tsx
 import React, { useEffect } from 'react'
 
-import { clientStore, serverStore, withStore } from '../store/store'
+import { clientStore, serverStore } from '../store/store'
 import { fetchName } from '../store/actions'
-
-const loadData = () => {
-  return serverStore.dispatch(fetchName())
-}
 
 const DisplayName = () => {
   const store = clientStore()
@@ -76,7 +72,11 @@ const DisplayName = () => {
   )
 }
 
-export default withStore(DisplayName, { loadData })
+DisplayName.prefetchData = () => {
+  return serverStore.dispatch(fetchName())
+}
+
+export default DisplayName
 ```
 
 ## MarkDown

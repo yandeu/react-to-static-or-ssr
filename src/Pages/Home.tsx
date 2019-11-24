@@ -1,16 +1,9 @@
 import React, { useEffect } from 'react'
 import Hero from '../Components/Hero/Hero'
 
-import { clientStore, serverStore, withStore } from '../store/store'
+import { clientStore, serverStore } from '../store/store'
 import { fetchName, fetchEmailAddresses } from '../store/actions'
 import { Link } from 'react-router-dom'
-
-const loadData = () => {
-  // if you fetch only one resource you can simply use ↵
-  // return serverStore.dispatch(fetchName())
-  // but if you fetch multiple resources use an array ↵
-  return [serverStore.dispatch(fetchName()), serverStore.dispatch(fetchEmailAddresses())]
-}
 
 const Home = () => {
   const store = clientStore()
@@ -50,4 +43,11 @@ const Home = () => {
   )
 }
 
-export default withStore(Home, { loadData })
+Home.prefetchData = () => {
+  // if you fetch only one resource you can simply use ↵
+  // return serverStore.dispatch(fetchName())
+  // but if you fetch multiple resources use an array ↵
+  return [serverStore.dispatch(fetchName()), serverStore.dispatch(fetchEmailAddresses())]
+}
+
+export default Home
