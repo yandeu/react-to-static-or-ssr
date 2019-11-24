@@ -3,6 +3,7 @@ import Hero from '../Components/Hero/Hero'
 
 import { clientStore, serverStore, withStore } from '../store/store'
 import { fetchName, fetchEmailAddresses } from '../store/actions'
+import { Link } from 'react-router-dom'
 
 const loadData = () => {
   // if you fetch only one resource you can simply use ↵
@@ -25,19 +26,23 @@ const Home = () => {
       <section className="section">
         <div className="container">
           <h2>Address: {store.state.address}</h2>
-          <img style={{maxWidth: 200}} src="/img/react-logo.svg" />
+          <div>
+            <img style={{ maxWidth: 200 }} src="/img/react-logo.svg" />
+          </div>
+
+          <Link to="/tutorials">Go to the tutorials</Link>
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-            has been the industry's standard dummy text ever since the 1500s, when an unknown
-            printer took a galley of type and scrambled it to make a type specimen book...
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book...
           </p>
           <br />
           <ul>
-            {store.state?.emails?
-            store.state?.emails?.map((email, i) => (
-              <li key={i}>{email}</li>
-            ))
-          : <div>...loading</div>}
+            {store.state?.emails ? (
+              store.state?.emails?.map((email, i) => <li key={i}>{email}</li>)
+            ) : (
+              <div>...loading</div>
+            )}
           </ul>
         </div>
       </section>

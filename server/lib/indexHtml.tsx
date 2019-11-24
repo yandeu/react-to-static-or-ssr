@@ -7,7 +7,7 @@ const indexHtml = (
   sheets: any,
   helmet: any,
   initialState: any,
-  minify: boolean = true
+  minify: boolean = false
 ) => {
   const str = `
 <!DOCTYPE html>

@@ -24,6 +24,7 @@ A react starter template for creating single page applications, static html file
 - Only 10 dependencies
 - Using TypeScript
 - SEO features with react-helmet (incl. SSR)
+- Dynamic Pages using Markdown files (incl. YAML header)
 - Async data fetching and rendering using only the react context api (no redux)
 - Hydrates the react app after page load
 - Uses react-router-config instead of react-router-dom for rendering the matching route
@@ -71,6 +72,10 @@ const DisplayName = () => {
 
 export default withStore(DisplayName, { loadData })
 ```
+
+## MarkDown
+
+All markdown files are in `/public/markdown`
 
 ## Scripts
 

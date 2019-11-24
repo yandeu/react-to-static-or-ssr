@@ -8,6 +8,8 @@ export const reducer = (state, action) => {
       return { ...state, emails: action.payload }
     case 'set_user_data':
       return { ...state, userData: action.payload }
+    case 'page':
+      return { ...state, page: action.payload }
     default:
       return state
   }

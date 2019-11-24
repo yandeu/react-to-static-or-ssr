@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 const CopyPlugin = require('copy-webpack-plugin')
+var ManifestPlugin = require('webpack-manifest-plugin')
 
 module.exports = env => {
   const devMode = env && env.production ? false : true
@@ -60,9 +61,9 @@ module.exports = env => {
         chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[contenthash].css',
         ignoreOrder: false
       }),
-      new WebpackAssetsManifest({
-        output: 'assets.json'
-      })
+      // TODO: replace WebpackAssetsManifest by ManifestPlugin
+      new WebpackAssetsManifest({ output: 'assets.json' }),
+      new ManifestPlugin({ fileName: 'assets-manifest.json' })
     ]
   }
 }

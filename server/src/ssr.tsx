@@ -27,13 +27,13 @@ app.use('/', express.static(path.resolve(__dirname, '../../dist'), { index: fals
 
 app.get('*', async (req, res) => {
   const context: { url?: string; status?: number } = {}
-
   const sheets = new SheetsRegistry()
+  const origin = `${req.protocol}://${req.get('host')}`
 
   // load async data
   let promises: any[] = []
   matchRoutes(routes, req.url).forEach(({ route }) => {
-    if (route.loadData) promises.push(route.loadData())
+    if (route.loadData) promises.push(route.loadData({ url: req.url, origin }))
   })
 
   // flatten array of promises

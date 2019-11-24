@@ -7,6 +7,8 @@ import About from './Pages/About'
 import SomePage from './Pages/SomePage'
 import DisplayName from './Pages/DisplayName'
 import NotFoundPage from './Pages/404'
+import Tutorial from './Pages/Tutorial'
+import Tutorials from './Pages/Tutorials'
 
 const routes: RouteConfig[] = [
   {
@@ -31,6 +33,16 @@ const routes: RouteConfig[] = [
         path: '/simple',
         exact: true,
         component: SomePage
+      },
+      {
+        path: '/tutorials',
+        exact: true,
+        ...routeStore(Tutorials)
+      },
+      {
+        path: '/tutorials/:id',
+        exact: true,
+        ...routeStore(Tutorial)
       },
       {
         path: '*',

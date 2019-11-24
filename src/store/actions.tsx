@@ -1,6 +1,27 @@
 // @ts-ignore
 import axios from 'axios'
 
+export const fetchPages = (type: string) => async () => {
+  try {
+    // const res: any = await axios.get(url)
+    // return { type: 'page', payload: res.data }
+    return {}
+  } catch (error) {
+    console.error(error.message)
+    return {}
+  }
+}
+
+export const fetchPage = (url: string) => async () => {
+  try {
+    const res: any = await axios.get(url)
+    return { type: 'page', payload: res.data }
+  } catch (error) {
+    console.error(error.message)
+    return {}
+  }
+}
+
 export const fetchName = () => async () => {
   try {
     const mockWebRequest = () => {

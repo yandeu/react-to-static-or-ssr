@@ -23,9 +23,10 @@ const app = express()
 
 app.use(compression())
 
-app.use('/', express.static(path.resolve(__dirname, '../../dist'), { extensions: [''] }))
+app.get('*', (req, res, next) => {
+  // pass to express.static route if a file is requested
+  if (/^\/.*\..+/gm.test(req.url)) return next()
 
-app.get('*', (req, res) => {
   // remove trailing slash
   let trailingSlashRegex = /\/$/
   if (req.path !== '/' && req.path.match(trailingSlashRegex)) {
@@ -53,8 +54,11 @@ app.get('*', (req, res) => {
   })
 })
 
+app.use('/', express.static(path.resolve(__dirname, '../../dist')))
+
 const generateStaticHtml = async () => {
   const context: { url?: string } = {}
+  const origin = `http://localhost:${port}`
 
   const rootUrl = '/'
 
@@ -78,7 +82,7 @@ const generateStaticHtml = async () => {
     // load async data
     let promises: any[] = []
     matchRoutes(routes, url).forEach(({ route }) => {
-      if (route.loadData) promises.push(route.loadData())
+      if (route.loadData) promises.push(route.loadData({ url, origin }))
     })
 
     // flatten array of promises
