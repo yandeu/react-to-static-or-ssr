@@ -33,9 +33,9 @@ app.get('*', (req, res, next) => {
     return res.redirect(req.path.replace(trailingSlashRegex, ''))
   }
 
-  // serve the html without .html extenstion
-  let url = req.path === '/' ? 'index' : req.path
-  fs.readFile(path.resolve(__dirname, `../../dist/${url}.html`), 'utf8', (err, data) => {
+  // serve the html without .html extension
+  let url = req.path === '/' ? '' : `${req.path}/`
+  fs.readFile(path.resolve(__dirname, `../../dist/${url}index.html`), 'utf8', (err, data) => {
     if (err)
       res.status(404).send(`
     <!DOCTYPE html>
