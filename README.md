@@ -18,6 +18,12 @@ A react starter template for creating single page applications, static html file
   <a href="https://github.com/prettier/prettier" alt="code style: prettier"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square"></a>
 </p>
 
+## Demo
+
+Check out how this [project look on AWS S3](http://react-to-static-or-ssr.s3-website.eu-central-1.amazonaws.com/), exported as static files. Works, of course, with or without JavaScript activated in your browser.
+
+The email addresses and names are fetch from JSONPlaceholder. The demo tutorials are fetched from markdown files.
+
 ## Key Features
 
 - Very easy to read and use
