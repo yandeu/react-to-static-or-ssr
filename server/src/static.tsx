@@ -116,8 +116,8 @@ const generateStaticHtml = async () => {
       fs.mkdirSync(dirname, { recursive: true })
     }
 
-    // const filename = url === '/' ? 'index.html' : `${url}/index.html`
-    const filename = url === '/' ? 'index.html' : `${url}.html`
+    const filename = url === '/' ? 'index.html' : `${url}/index.html`
+    // const filename = url === '/' ? 'index.html' : `${url}.html`
     const filePath = path.resolve(__dirname, `../../dist/${filename}`)
     ensureDirectoryExistence(filePath)
     fs.writeFile(filePath, indexHtml(html, assets, sheets, helmet, initialState), err => {
