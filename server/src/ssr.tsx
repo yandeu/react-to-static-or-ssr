@@ -23,9 +23,16 @@ const app = express()
 
 app.use(compression())
 
-app.use('/', express.static(path.resolve(__dirname, '../../dist'), { index: false }))
+app.get('*', async (req, res, next) => {
+  // pass to express.static route if a file is requested
+  if (/^\/.*\..+/gm.test(req.url)) return next()
 
-app.get('*', async (req, res) => {
+  // remove trailing slash
+  let trailingSlashRegex = /\/$/
+  if (req.path !== '/' && req.path.match(trailingSlashRegex)) {
+    return res.redirect(req.path.replace(trailingSlashRegex, ''))
+  }
+
   const context: { url?: string; status?: number } = {}
   const sheets = new SheetsRegistry()
   const origin = `${req.protocol}://${req.get('host')}`
@@ -75,6 +82,8 @@ app.get('*', async (req, res) => {
     res.end()
   }
 })
+
+app.use('/', express.static(path.resolve(__dirname, '../../dist')))
 
 fs.readFile(path.resolve(__dirname, '../../dist/assets.json'), 'utf8', (err, data) => {
   if (err) throw err
