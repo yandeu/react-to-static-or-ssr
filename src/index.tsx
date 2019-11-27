@@ -9,7 +9,9 @@ const rootElement = document.getElementById('root')
 if (!rootElement) throw new Error('#root not found!')
 
 declare global {
-  interface Window  { INITIAL_STATE: any; }
+  interface Window {
+    INITIAL_STATE: any
+  }
 }
 
 const initialState = window?.INITIAL_STATE || 'undefined'

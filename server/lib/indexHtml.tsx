@@ -18,8 +18,9 @@ const indexHtml = (
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="icon" href="/static/favicon.ico" type="image/gif" sizes="16x16">
     ${Object.keys(assets)
-      .filter(key => key.match(/\.css$/g))
-      .map(key => `<link rel="stylesheet" href="/${assets[key]}">`)}
+      .filter(key => key.match('main.css'))
+      .map(key => `<link rel="stylesheet" href="/${assets[key]}">`)
+      .join('')}
     <style type="text/css" id="server-side-styles">
       ${sheets.toString()}
     </style>

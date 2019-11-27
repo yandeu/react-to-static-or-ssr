@@ -27,12 +27,6 @@ app.get('*', async (req, res, next) => {
   // pass to express.static route if a file is requested
   if (/^\/.*\..+/gm.test(req.url)) return next()
 
-  // remove trailing slash
-  let trailingSlashRegex = /\/$/
-  if (req.path !== '/' && req.path.match(trailingSlashRegex)) {
-    return res.redirect(req.path.replace(trailingSlashRegex, ''))
-  }
-
   const context: { url?: string; status?: number } = {}
   const sheets = new SheetsRegistry()
   const origin = `${req.protocol}://${req.get('host')}`
