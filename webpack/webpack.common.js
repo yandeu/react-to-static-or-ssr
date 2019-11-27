@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 const CopyPlugin = require('copy-webpack-plugin')
-var ManifestPlugin = require('webpack-manifest-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 
 module.exports = env => {
   const devMode = env && env.production ? false : true
@@ -37,7 +37,16 @@ module.exports = env => {
         },
         {
           test: /\.tsx?$/,
-          use: 'ts-loader',
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env'],
+                plugins: []
+              }
+            },
+            'ts-loader'
+          ],
           exclude: /node_modules/
         }
       ]
@@ -47,6 +56,7 @@ module.exports = env => {
     },
     output: {
       filename: devMode ? 'js/bundle.js' : 'js/bundle.[contenthash].js',
+      chunkFilename: devMode ? 'js/chunk.[id].js' : 'js/chunk.[id].[contenthash].js',
       path: path.resolve(__dirname, '../dist'),
       publicPath: '/'
     },
