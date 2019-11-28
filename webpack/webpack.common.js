@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 const CopyPlugin = require('copy-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
+const ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin
 
 module.exports = env => {
   const devMode = env && env.production ? false : true
@@ -42,7 +43,7 @@ module.exports = env => {
               loader: 'babel-loader',
               options: {
                 presets: ['@babel/preset-env'],
-                plugins: []
+                plugins: ['react-loadable/babel']
               }
             },
             'ts-loader'
@@ -52,7 +53,10 @@ module.exports = env => {
       ]
     },
     resolve: {
-      extensions: ['.tsx', '.ts', '.js', '.css']
+      extensions: ['.tsx', '.ts', '.js', '.css'],
+      alias: {
+        '@pages': path.resolve(__dirname, '../src/Pages/')
+      }
     },
     output: {
       filename: devMode ? 'js/bundle.js' : 'js/bundle.[contenthash].js',
@@ -61,6 +65,9 @@ module.exports = env => {
       publicPath: '/'
     },
     plugins: [
+      new ReactLoadablePlugin({
+        filename: path.resolve(__dirname, '../dist/react-loadable.json')
+      }),
       new CopyPlugin([{ from: 'public', to: '' }]),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, '../public/index.html'),

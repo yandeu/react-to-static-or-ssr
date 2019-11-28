@@ -43,7 +43,7 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
-              plugins: []
+              plugins: ['react-loadable/babel']
             }
           },
           'ts-loader'
@@ -53,7 +53,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.css']
+    extensions: ['.tsx', '.ts', '.js', '.css'],
+    alias: {
+      '@pages': path.resolve(__dirname, '../src/Pages/')
+    }
   },
   output: {
     filename: '[name].js',

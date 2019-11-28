@@ -4,6 +4,7 @@ import serialize from 'serialize-javascript'
 const indexHtml = (
   html: string,
   assets: Object,
+  bundles: any,
   sheets: any,
   helmet: any,
   initialState: any,
@@ -20,7 +21,7 @@ const indexHtml = (
     ${Object.keys(assets)
       .filter(key => key.match('main.css'))
       .map(key => `<link rel="stylesheet" href="/${assets[key]}">`)
-      .join('')}
+      .join('\n')}
     <style type="text/css" id="server-side-styles">
       ${sheets.toString()}
     </style>
@@ -33,9 +34,16 @@ const indexHtml = (
     ${helmet.noscript.toString()}
     <div id="root">${html}</div>
     <script>window.INITIAL_STATE = ${serialize(initialState)};</script>
+    ${bundles
+      .map(bundle => {
+        if (!bundle) return '<script>console.error("bundle not found!!");</script>'
+        return `<script src="/${bundle.file}"></script>`
+      })
+      .join('\n')}
     ${Object.keys(assets)
       .filter(key => key.match(/\.js$/g))
-      .map(key => `<script src="/${assets[key]}"></script>`)}
+      .map(key => `<script src="/${assets[key]}"></script>`)
+      .join('\n')}
   </body>
 </html>
 `

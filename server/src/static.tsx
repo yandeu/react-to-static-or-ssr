@@ -125,6 +125,7 @@ const generateStaticHtml = async () => {
     // const filename = url === '/' ? 'index.html' : `${url}.html`
     const filePath = path.resolve(__dirname, `../../dist/${filename}`)
     ensureDirectoryExistence(filePath)
+    // @ts-ignore
     fs.writeFile(filePath, indexHtml(html, assets, sheets, helmet, initialState), err => {
       if (err) {
         return console.log(err)

@@ -4,6 +4,7 @@ import { renderRoutes } from 'react-router-config'
 import routes from './routes'
 import { BrowserRouter } from 'react-router-dom'
 import { StoreProvider } from './store/store'
+import Loadable from 'react-loadable'
 
 const rootElement = document.getElementById('root')
 if (!rootElement) throw new Error('#root not found!')
@@ -23,11 +24,15 @@ const rootComponents = (
 )
 
 if (rootElement.hasChildNodes()) {
-  hydrate(rootComponents, rootElement, () => {
-    // [react-jss] We don't need the static css any more once we have launched our application.
-    const ssStyles = document.getElementById('server-side-styles')
-    if (ssStyles?.parentNode) ssStyles.parentNode.removeChild(ssStyles)
+  Loadable.preloadReady().then(() => {
+    hydrate(rootComponents, rootElement, () => {
+      // [react-jss] We don't need the static css any more once we have launched our application.
+      const ssStyles = document.getElementById('server-side-styles')
+      if (ssStyles?.parentNode) ssStyles.parentNode.removeChild(ssStyles)
+    })
   })
 } else {
-  render(rootComponents, rootElement)
+  Loadable.preloadReady().then(() => {
+    render(rootComponents, rootElement)
+  })
 }

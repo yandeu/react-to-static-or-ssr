@@ -50,8 +50,12 @@ const About = () => {
   )
 }
 
-About.prefetchData = () => {
+// About.prefetchData = () => {
+//   return serverStore.dispatch(fetchUserNameAndId())
+// }
+
+const prefetchData = ({ origin, url }) => {
   return serverStore.dispatch(fetchUserNameAndId())
 }
 
-export default About
+export default { component: About, prefetchData }
