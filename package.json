@@ -55,7 +55,7 @@
     "react-jss": "^10.0.0",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.1.2",
-    "serialize-javascript": "^2.1.0"
+    "serialize-javascript": "^2.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",
