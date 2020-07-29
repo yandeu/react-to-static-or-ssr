@@ -50,4 +50,4 @@ export const serverStore: ServerStore = {
   }
 }
 
-export const clientStore = (): ClientStore => useContext(Store)
+export const clientStore = (): ClientStore | any => useContext(Store)
