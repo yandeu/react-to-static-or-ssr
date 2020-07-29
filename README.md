@@ -151,6 +151,10 @@ run `npm spa:serve` or `npm ssr:serve` or `npm static:serve`
 - Port 3060 (ssr)
 - Port 3070 (static)
 
+## Nano JSX
+
+Love this template? Checkout [Nano JSX](https://nanojsx.github.io/)! It's designed to pre-render JSX on the server and then partially hydrate it on the client.
+
 ## License
 
 The MIT License (MIT) 2019 - [Yannick Deubel](https://github.com/yandeu). Please have a look at the [LICENSE](LICENSE) for more details.
